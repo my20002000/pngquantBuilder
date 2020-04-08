@@ -29,7 +29,8 @@ for:
       - git clone -b msvc --recursive https://github.com/kornelski/pngquant.git
       - cd pngquant
       - cargo build --release
-      - powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('tmp', '%FULL_NAME%.zip'); }"
+    after_build:
+      -7z a all.zip %APPVEYOR_BUILD_FOLDER%
     artifacts:
-    - path: '*.zip'
-      name: files
+      - path: 'all.zip'
+        name: all
