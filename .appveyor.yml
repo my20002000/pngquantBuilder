@@ -31,6 +31,7 @@ for:
       - cargo build --release
     after_build:
       - 7z a all.zip %APPVEYOR_BUILD_FOLDER%
+      - dir /s
     artifacts:
       - path: all.zip
         name: all
