@@ -14,11 +14,11 @@ for:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
           TARGET: x86_64-pc-windows-gnu
     install:
-      - cmd: >-
-          appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
-          rustup-init -yv --default-toolchain stable --default-host %HOST%
-          set PATH=%PATH%;%USERPROFILE%\.cargo\bin
-          rustc -V
+      - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+      - rustup-init -yv --default-toolchain stable --default-host %HOST%
+      - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+      - rustc -V
+      - cargo -V
     build_script:
       - cmd: >-
           echo on
