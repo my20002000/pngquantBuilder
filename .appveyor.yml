@@ -30,8 +30,7 @@ for:
       - cd pngquant
       - cargo build --release
     after_build:
-      - 7z a all.zip %APPVEYOR_BUILD_FOLDER%
-      - dir /s
+      - 7z a %APPVEYOR_BUILD_FOLDER%/../all.zip %APPVEYOR_BUILD_FOLDER%
     artifacts:
       - path: all.zip
         name: all
