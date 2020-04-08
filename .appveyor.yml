@@ -18,6 +18,7 @@ for:
           appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
           rustup-init -yv --default-toolchain stable --default-host %HOST%
           set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+          rustc -V
     build_script:
       - cmd: >-
           echo on
