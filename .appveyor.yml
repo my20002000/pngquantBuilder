@@ -22,16 +22,14 @@ for:
       - set PATH=%PATH%;C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
       - g++ --version
     build_script:
-      - cmd: >-
-          echo on
-          if "%MODE%" == "release" ( set RELEASE_FLAG=--release& set TARGET_DIR=release& set NAME_SUFFIX=) else ( set RELEASE_FLAG=& set TARGET_DIR=debug& set NAME_SUFFIX=-debug)
-          set FULL_NAME=%ARCHIVE_NAME%%NAME_SUFFIX%-%APPVEYOR_REPO_BRANCH%
-          mkdir tmp
-          cd tmp
-          git clone -b msvc --recursive https://github.com/kornelski/pngquant.git
-          cd pngquant
-          cargo build --release
-          powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('tmp', '%FULL_NAME%.zip'); }"
+      - if "%MODE%" == "release" ( set RELEASE_FLAG=--release& set TARGET_DIR=release& set NAME_SUFFIX=) else ( set RELEASE_FLAG=& set TARGET_DIR=debug& set NAME_SUFFIX=-debug)
+      - set FULL_NAME=%ARCHIVE_NAME%%NAME_SUFFIX%-%APPVEYOR_REPO_BRANCH%
+      - mkdir tmp
+      - cd tmp
+      - git clone -b msvc --recursive https://github.com/kornelski/pngquant.git
+      - cd pngquant
+      - cargo build --release
+      - powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory('tmp', '%FULL_NAME%.zip'); }"
     artifacts:
     - path: '*.zip'
       name: files
