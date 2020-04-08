@@ -16,6 +16,7 @@ for:
     install:
       - cmd: >-
           appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+          rustup-init -yv --default-toolchain stable --default-host %HOST%
     build_script:
       - cmd: >-
           echo on
